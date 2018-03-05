@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>Sprite.js</title>
+    <style>
+        .test {
+            outline: 1px solid red;
+            width: 100%;
+            max-width: 200px;
+        }
+    </style>
+    <script src="src/tools.js"></script>
+    <script src="src/preloader.js"></script>
+    <script src="src/observer.js"></script>
+    <script src="src/sprite.js"></script>
+</head>
+<body>
+    <div class="test"></div>
+    <script>
+        var sp = new Sprite({
+            el: '.test',
+            fps: 24,
+            // duration: 1000,
+            width: 480,
+            height: 800,
+            imgBaseUrl: 'images/',
+            imgName: 'demo',
+            imgType: '.png',
+            imgStartIndex: 0,
+            imgEndIndex: 28,
+            repeat: 1,
+            // autoPlay: true
+        }).init();
+
+        sp.play();
+
+        console.log(sp);
+        // sp.stop();
+    </script>
+</body>
+</html>
