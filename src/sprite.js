@@ -2,15 +2,15 @@
  *  sprite.js
  *
  *  Author : Hank Hsiao
- *  Version: 0.0.1
+ *  Version: 0.0.2
  *  Create : 2018.3.5
- *  Update : 2018.3.5
+ *  Update : 2018.3.6
  *  License: MIT
  */
 
 var Sprite = (function() {
     var defaultSetting = {
-        fps: 12,
+        fps: 24,
         width: 0,
         height: 0,
         imgBaseUrl: '',
@@ -24,7 +24,6 @@ var Sprite = (function() {
 
     function Sprite(setting) {
         this.setting = tools.deepCopy(setting, defaultSetting);
-        console.log(this.setting);
     }
 
     // observer.js
@@ -35,19 +34,20 @@ var Sprite = (function() {
         this.el = document.querySelector(this.setting.el);
         this.totalFrames = this.setting.imgEndIndex - this.setting.imgStartIndex + 1;
         this.currentFrame = 0;
-        this.preload();
+        this.currentRepeat = 1;
+        this._preload();
         return this;
     };
 
-    Sprite.prototype.preload = function() {
+    Sprite.prototype._preload = function() {
         var self = this;
         var preloadConfig = {
             manifest: [],
+            onEachLoad: function(info) {},
             onAllLoad: function(source) {
-                console.log('img all loaded');
-                self.trigger('preloaded', source);
+                self.trigger('load', source);
                 self.source = source;
-                self.create();
+                self._create();
             }
         };
     
@@ -61,9 +61,7 @@ var Sprite = (function() {
         preloader(preloadConfig);
     };
 
-    Sprite.prototype.create = function() {
-        console.log('create...');
-        console.log(this.source);
+    Sprite.prototype._create = function() {
         this.canvas = document.createElement('canvas');
         this.ctx = this.canvas.getContext('2d');
         this.canvas.style.display = 'block';
@@ -76,38 +74,40 @@ var Sprite = (function() {
         }
     };
 
-    Sprite.prototype.controlAimation = function() {
-        
-        if (this.currentFrame > this.totalFrames - 1) {
-            this.stop();
-            console.log('好了啦');
-            return;
+    Sprite.prototype._controlAimation = function() {
+        if (this.currentFrame < this.totalFrames - 1) {
+            this.ctx.clearRect(0, 0, this.setting.width, this.setting.height);
+            var key = this.setting.imgName + this.currentFrame;
+            this.ctx.drawImage(this.source[key].img, 0, 0, this.setting.width, this.setting.height);
+            this.currentFrame++;
+        } else {
+            if (this.currentRepeat < this.setting.repeat || this.setting.repeat === -1 ) {
+                this.currentFrame = 0
+                this.currentRepeat++;
+            } else {
+                this.stop();
+            }    
         }
-
-        this.ctx.clearRect(0, 0, this.setting.width, this.setting.height);
-
-        var key = this.setting.imgName + this.currentFrame;
-        // console.log(key);
-        this.ctx.drawImage(this.source[key].img, 0, 0, this.setting.width, this.setting.height);
-        this.currentFrame++;
     };
 
-    Sprite.prototype.controlTimer = function() {
+    Sprite.prototype._controlTimer = function() {
         var speed = 1000 / this.setting.fps;
         if (this.setting.duration !== undefined) {
             speed = this.setting.duration / this.totalFrames;
         }
-        this.timer = setInterval(this.controlAimation.bind(this), speed);
+        this.timer = setInterval(this._controlAimation.bind(this), speed);
     };
 
     Sprite.prototype.play = function() {
-        console.log('play');
-        this.controlTimer();
+        this.trigger('play');
+        this._controlTimer();
+        return this;
     };
 
     Sprite.prototype.stop = function() {
-        console.log('stop');
+        this.trigger('stop');
         clearInterval(this.timer);
+        return this;
     };
 
     return Sprite;

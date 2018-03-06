@@ -51,7 +51,7 @@ var preloader = function(option) {
 
     for (i = 0; i < imgQty; i += 1) {
         img = new Image();
-        console.log(img.complete);
+        // console.log(img.complete);
         img.addEventListener('load', onLoad.bind(img, i, settings.manifest[i].id), false);
         img.addEventListener('error', onError.bind(img, i, settings.manifest[i].id), false);
         img.src = settings.manifest[i].src;
