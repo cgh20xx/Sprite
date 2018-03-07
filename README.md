@@ -1,6 +1,6 @@
 #Usage
 
-    [Demo link](https://cgh20xx.github.io/Sprite/)
+[Demo link](https://cgh20xx.github.io/Sprite/)
 
     var sp = new Sprite({
         el: '#test',
