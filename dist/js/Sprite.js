@@ -159,9 +159,9 @@ Observer.prototype.hasListeners = function(event) {
  *  sprite.js
  *
  *  Author : Hank Hsiao
- *  Version: 0.0.3
+ *  Version: 0.0.4
  *  Create : 2018.3.5
- *  Update : 2018.3.8
+ *  Update : 2018.3.7
  *  License: MIT
  */
 
@@ -175,7 +175,7 @@ var Sprite = (function() {
         imgType: '.jpg',
         imgStartIndex: 0,
         imgEndIndex: 0,
-        repeat: 1,
+        repeat: 0,
         autoPlay: true
     };
 
@@ -211,7 +211,7 @@ var Sprite = (function() {
         this.el = document.querySelector(this.setting.el);
         this.totalFrames = this.setting.imgEndIndex - this.setting.imgStartIndex + 1;
         this.currentFrame = 0;
-        this.currentRepeat = 1;
+        this.currentRepeat = 0;
         this.isPlaying = false;
         this._preload();
         return this;
@@ -259,14 +259,14 @@ var Sprite = (function() {
             this.ctx.drawImage(this.source[key].img, 0, 0, this.setting.width, this.setting.height);
             this.currentFrame++;
         } else {
-            if (this.currentRepeat < this.setting.repeat || this.setting.repeat === -1 ) {
+            if (this.currentRepeat <= this.setting.repeat || this.setting.repeat === -1 ) {
                 this.currentFrame = 0
                 this.currentRepeat++;
             } else {
                 this.stop();
             }    
         }
-    };
+    }
 
     Sprite.prototype._controlTimer = function() {
         var speed = 1000 / this.setting.fps;
