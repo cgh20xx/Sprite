@@ -2,11 +2,11 @@
 
 function Observer(obj) {
     if (obj) {
-        return copy(obj);
+        return Observer.copy(obj);
     }
 }
 
-function copy(obj) {
+Observer.copy = function(obj) {
     for (var key in Observer.prototype) {
         obj[key] = Observer.prototype[key];
     }
