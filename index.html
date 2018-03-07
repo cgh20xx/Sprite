@@ -5,11 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <title>Sprite.js</title>
     <style>
-        body {
-            background: #000;
-        }
         #test {
-            outline: 1px solid red;
+            outline: 1px solid black;
             width: 100%;
             max-width: 200px;
         }
@@ -21,11 +18,18 @@
 </head>
 <body>
     <div id="test"></div>
+    <br>
+    <input id="btnPlay" type="button" value="play">
+    
+    <input id="btnStop" type="button" value="stop">
+
+    <input id="btnResume" type="button" value="resume">
+
     <script>
         var sp = new Sprite({
             el: '#test',
-            fps: 24,
-            // duration: 2000,
+            fps: 30,
+            // duration: 3000, //option
             width: 320,
             height: 320,
             imgBaseUrl: 'images/',
@@ -33,21 +37,36 @@
             imgType: '.png',
             imgStartIndex: 0,
             imgEndIndex: 27,
-            repeat: -1,
-            // autoPlay: true
+            repeat: 2,
+            autoPlay: false
         }).init();
 
         sp
         .on('load', function(source) {
             console.log('preloaded');
             console.log(source);
-            sp.play();
+            // sp.play();
         })
         .on('play', function() {
             console.log('play');
         })
         .on('stop', function() {
             console.log('stop');
+        })
+        .on('resume', function() {
+            console.log('resume');
+        });
+
+        btnPlay.addEventListener('click', function(e) {
+            sp.play();
+        });
+
+        btnStop.addEventListener('click', function(e) {
+            sp.stop();
+        });
+
+        btnResume.addEventListener('click', function(e) {
+            sp.resume();
         });
         
     </script>

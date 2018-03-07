@@ -2,15 +2,15 @@
  *  sprite.js
  *
  *  Author : Hank Hsiao
- *  Version: 0.0.2
+ *  Version: 0.0.3
  *  Create : 2018.3.5
- *  Update : 2018.3.6
+ *  Update : 2018.3.7
  *  License: MIT
  */
 
 var Sprite = (function() {
     var defaultSetting = {
-        fps: 24,
+        fps: 12,
         width: 0,
         height: 0,
         imgBaseUrl: '',
@@ -18,8 +18,8 @@ var Sprite = (function() {
         imgType: '.jpg',
         imgStartIndex: 0,
         imgEndIndex: 0,
-        repeat: -1,
-        autoPlay: false
+        repeat: 1,
+        autoPlay: true
     };
 
     function Sprite(setting) {
@@ -35,6 +35,7 @@ var Sprite = (function() {
         this.totalFrames = this.setting.imgEndIndex - this.setting.imgStartIndex + 1;
         this.currentFrame = 0;
         this.currentRepeat = 1;
+        this.isPlaying = false;
         this._preload();
         return this;
     };
@@ -99,14 +100,32 @@ var Sprite = (function() {
     };
 
     Sprite.prototype.play = function() {
+        if (this.isPlaying) {
+            clearInterval(this.timer);  
+        }
         this.trigger('play');
+        this.currentFrame = 0;
+        this.currentRepeat = 1;
+        this.isPlaying = true;
         this._controlTimer();
         return this;
     };
 
+    Sprite.prototype.resume = function() {
+        if (!this.isPlaying) {
+            this.isPlaying = true;
+            this.trigger('resume');
+            this._controlTimer();
+        }
+        return this;
+    };
+
     Sprite.prototype.stop = function() {
-        this.trigger('stop');
-        clearInterval(this.timer);
+        if (this.isPlaying) {
+            this.isPlaying = false;
+            this.trigger('stop');
+            clearInterval(this.timer);    
+        }
         return this;
     };
 
