@@ -159,9 +159,9 @@ Observer.prototype.hasListeners = function(event) {
  *  sprite.js
  *
  *  Author : Hank Hsiao
- *  Version: 0.0.4
+ *  Version: 0.0.5
  *  Create : 2018.3.5
- *  Update : 2018.3.7
+ *  Update : 2018.3.8
  *  License: MIT
  */
 
@@ -252,7 +252,7 @@ var Sprite = (function() {
         }
     };
 
-    Sprite.prototype._controlAimation = function() {
+    Sprite.prototype._controlAnimation = function() {
         if (this.currentFrame < this.totalFrames - 1) {
             this.ctx.clearRect(0, 0, this.setting.width, this.setting.height);
             var key = this.setting.imgName + this.currentFrame;
@@ -273,7 +273,7 @@ var Sprite = (function() {
         if (this.setting.duration !== undefined) {
             speed = this.setting.duration / this.totalFrames;
         }
-        this.timer = setInterval(this._controlAimation.bind(this), speed);
+        this.timer = setInterval(this._controlAnimation.bind(this), speed);
     };
 
     Sprite.prototype.play = function() {
