@@ -242,8 +242,8 @@ var Sprite = (function() {
     Sprite.prototype._create = function() {
         this.canvas = document.createElement('canvas');
         this.ctx = this.canvas.getContext('2d');
-        this.canvas.style.display = 'block';
-        this.canvas.style.width = '100%';
+        // this.canvas.style.display = 'block';
+        // this.canvas.style.width = '100%';
         this.canvas.width = this.setting.width;
         this.canvas.height = this.setting.height;
         this.el.appendChild(this.canvas);
