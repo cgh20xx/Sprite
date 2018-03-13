@@ -6,8 +6,6 @@
 
 [Donload Sprite.min.js](https://cgh20xx.github.io/Sprite/dist/js/Sprite.min.js)
 
-# Example
-
 ```javascript
 var sp = new Sprite({
     el: '#test',
