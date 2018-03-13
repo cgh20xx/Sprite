@@ -5,7 +5,7 @@ var gulp = require('gulp'),
     pump = require('pump'),
     babel = require('gulp-babel')
 
-var jsDest = 'dist/js';
+var jsDest = 'js';
 
 gulp.task('default', function(cb) {
     pump([

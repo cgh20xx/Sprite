@@ -2,8 +2,8 @@
 [Demo](https://cgh20xx.github.io/Sprite/)
 
 # Download
-[Sprite.js](https://cgh20xx.github.io/Sprite/dist/js/Sprite.js)
-[Sprite.min.js](https://cgh20xx.github.io/Sprite/dist/js/Sprite.min.js)
+[Sprite.js](https://cgh20xx.github.io/Sprite/js/Sprite.js)
+[Sprite.min.js](https://cgh20xx.github.io/Sprite/js/Sprite.min.js)
 
 # Example
 ```javascript

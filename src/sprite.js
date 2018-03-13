@@ -2,26 +2,13 @@
  *  sprite.js
  *
  *  Author : Hank Hsiao
- *  Version: 0.0.7
+ *  Version: 0.0.8
  *  Create : 2018.3.5
  *  Update : 2018.3.13
  *  License: MIT
  */
 
 var Sprite = (function() {
-    var defaultSetting = {
-        fps: 12,
-        width: 0,
-        height: 0,
-        imgBaseUrl: '',
-        imgName: 'img',
-        imgType: '.jpg',
-        imgStartIndex: 0,
-        imgEndIndex: 0,
-        repeat: 0,
-        autoPlay: true
-    };
-
     /**
      * deepCopy
      * @param  Function Parent
@@ -43,6 +30,18 @@ var Sprite = (function() {
     };
 
     function Sprite(setting) {
+        var defaultSetting = {
+            fps: 12,
+            width: 0,
+            height: 0,
+            imgBaseUrl: '',
+            imgName: 'img',
+            imgType: '.jpg',
+            imgStartIndex: 0,
+            imgEndIndex: 0,
+            repeat: 0,
+            autoPlay: true
+        };
         this.setting = deepCopy(setting, defaultSetting);
     }
 
