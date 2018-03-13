@@ -1,11 +1,10 @@
 # Demo
+[Demo](https://cgh20xx.github.io/Sprite/)
 
-[Demo link](https://cgh20xx.github.io/Sprite/)
+# Download
+[Sprite.js](https://cgh20xx.github.io/Sprite/dist/js/Sprite.js) [Sprite.min.js](https://cgh20xx.github.io/Sprite/dist/js/Sprite.min.js)
 
-[Donload Sprite.js](https://cgh20xx.github.io/Sprite/dist/js/Sprite.js)
-
-[Donload Sprite.min.js](https://cgh20xx.github.io/Sprite/dist/js/Sprite.min.js)
-
+# Example
 ```javascript
 var sp = new Sprite({
     el: '#test',
