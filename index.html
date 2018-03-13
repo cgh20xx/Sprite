@@ -5,10 +5,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <title>Sprite.js</title>
     <style>
-        #test {
+        body {
+            background: #9fc;
+        }
+        canvas {
             outline: 1px solid black;
-            width: 100%;
-            max-width: 200px;
         }
     </style>
     <script src="dist/js/Sprite.min.js"></script>
@@ -25,8 +26,8 @@
     <script>
         var sp = new Sprite({
             el: '#test',
-            fps: 24,
-            // duration: 3000, //option
+            fps: 18,
+            // duration: 3000, // set duration will ignore fps
             width: 320,
             height: 320,
             imgBaseUrl: 'images/',

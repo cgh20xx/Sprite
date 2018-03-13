@@ -2,9 +2,9 @@
  *  sprite.js
  *
  *  Author : Hank Hsiao
- *  Version: 0.0.6
+ *  Version: 0.0.7
  *  Create : 2018.3.5
- *  Update : 2018.3.12
+ *  Update : 2018.3.13
  *  License: MIT
  */
 
@@ -96,18 +96,18 @@ var Sprite = (function() {
     };
 
     Sprite.prototype._controlAnimation = function() {
-        if (this.currentFrame < this.totalFrames - 1) {
-            this.ctx.clearRect(0, 0, this.setting.width, this.setting.height);
-            var key = this.setting.imgName + (this.currentFrame + this.setting.imgStartIndex);
-            this.ctx.drawImage(this.source[key].img, 0, 0, this.setting.width, this.setting.height);
-            this.currentFrame++;
-        } else {
-            if (this.currentRepeat <= this.setting.repeat || this.setting.repeat === -1 ) {
-                this.currentFrame = 0
+        this.ctx.clearRect(0, 0, this.setting.width, this.setting.height);
+        var key = this.setting.imgName + (this.currentFrame + this.setting.imgStartIndex);
+        this.ctx.drawImage(this.source[key].img, 0, 0, this.setting.width, this.setting.height);        
+        this.currentFrame++;
+
+        if (this.currentFrame >= this.totalFrames) {
+            if (this.setting.repeat !== 0 && (this.currentRepeat <= this.setting.repeat || this.setting.repeat === -1)) {
+                this.currentFrame = 0;
                 this.currentRepeat++;
             } else {
                 this.stop();
-            }    
+            }
         }
     }
 
