@@ -2,11 +2,16 @@
 
 [Demo link](https://cgh20xx.github.io/Sprite/)
 
+[Donload Sprite.js](https://cgh20xx.github.io/Sprite/dist/js/Sprite.js)
+
+[Donload Sprite.min.js](https://cgh20xx.github.io/Sprite/dist/js/Sprite.min.js)
+
+#Example
 ```javascript
 var sp = new Sprite({
     el: '#test',
-    fps: 30,
-    // duration: 3000, //option
+    fps: 18,
+    // duration: 3000, // set duration will ignore fps
     width: 320,
     height: 320,
     imgBaseUrl: 'images/',
@@ -14,7 +19,7 @@ var sp = new Sprite({
     imgType: '.png',
     imgStartIndex: 0,
     imgEndIndex: 27,
-    repeat: 2,
+    repeat: -1,
     autoPlay: false
 }).init();
 
@@ -22,7 +27,7 @@ sp
 .on('load', function(source) {
     console.log('preloaded');
     console.log(source);
-    // sp.play();
+    sp.play();
 })
 .on('play', function() {
     console.log('play');
