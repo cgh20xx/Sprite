@@ -318,6 +318,9 @@ var Sprite = (function() {
         this.el = dom;
         this.el.appendChild(this.canvas);
         this.trigger('mounted');
+        if (this.setting.autoPlay) {
+            this.play();
+        }
         return this;
     };
 
