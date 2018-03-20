@@ -6,13 +6,13 @@
     <title>Sprite.js</title>
     <style>
         body {
-            background: #9fc;
+            background: #ffd;
         }
         canvas {
             outline: 1px solid black;
         }
     </style>
-    <script src="js/Sprite.min.js"></script>
+    <script src="js/Sprite.js"></script>
 </head>
 <body>
     <div id="test"></div>
@@ -41,9 +41,9 @@
 
         sp
         .on('load', function(source) {
-            console.log('preloaded');
-            console.log(source);
-            sp.play();
+            console.log('loaded');
+            // this.mount(document.getElementById('test'));
+            this.play();
         })
         .on('play', function() {
             console.log('play');
@@ -53,6 +53,9 @@
         })
         .on('resume', function() {
             console.log('resume');
+        })
+        .on('mounted', function() {
+            console.log('mounted');
         });
 
         btnPlay.addEventListener('click', function(e) {

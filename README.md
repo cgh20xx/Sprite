@@ -5,7 +5,7 @@
 [Sprite.js](https://cgh20xx.github.io/Sprite/js/Sprite.js)
 [Sprite.min.js](https://cgh20xx.github.io/Sprite/js/Sprite.min.js)
 
-# Example
+# Example1
 ```javascript
 var sp = new Sprite({
     el: '#test',
@@ -24,18 +24,16 @@ var sp = new Sprite({
 
 sp
 .on('load', function(source) {
-    console.log('preloaded');
-    console.log(source);
     sp.play();
 })
 .on('play', function() {
-    console.log('play');
+    ...
 })
 .on('stop', function() {
-    console.log('stop');
+    ...
 })
 .on('resume', function() {
-    console.log('resume');
+    ...
 });
 
 btnPlay.addEventListener('click', function(e) {
@@ -48,5 +46,33 @@ btnStop.addEventListener('click', function(e) {
 
 btnResume.addEventListener('click', function(e) {
     sp.resume();
+});
+```
+
+# Example2
+
+You can use .mount() append to HTMLElemnt.
+
+```javascript
+var sp = new Sprite({
+    fps: 18,
+    width: 320,
+    height: 320,
+    imgBaseUrl: 'images/',
+    imgName: 'demo-',
+    imgType: '.png',
+    imgStartIndex: 0,
+    imgEndIndex: 27,
+    repeat: -1,
+    autoPlay: false
+}).init();
+
+sp
+.on('load', function(source) {
+    var test = document.getElementById('test');
+    this.mount(test);
+})
+.on('mounted', function() {
+    this.play();
 });
 ```

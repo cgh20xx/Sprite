@@ -159,9 +159,9 @@ Observer.prototype.hasListeners = function(event) {
  *  sprite.js
  *
  *  Author : Hank Hsiao
- *  Version: 0.0.8
+ *  Version: 0.0.9
  *  Create : 2018.3.5
- *  Update : 2018.3.13
+ *  Update : 2018.3.20
  *  License: MIT
  */
 
@@ -207,7 +207,7 @@ var Sprite = (function() {
 
     Sprite.prototype.init = function() {
         // preload images qty
-        this.el = document.querySelector(this.setting.el);
+        this.el = this.setting.el && document.querySelector(this.setting.el);
         this.totalFrames = this.setting.imgEndIndex - this.setting.imgStartIndex + 1;
         this.currentFrame = 0;
         this.currentRepeat = 0;
@@ -222,9 +222,9 @@ var Sprite = (function() {
             manifest: [],
             onEachLoad: function(info) {},
             onAllLoad: function(source) {
-                self.trigger('load', source);
-                self.source = source;
                 self._create();
+                self.source = source;
+                self.trigger('load', source);
             }
         };
     
@@ -245,10 +245,14 @@ var Sprite = (function() {
         // this.canvas.style.width = '100%';
         this.canvas.width = this.setting.width;
         this.canvas.height = this.setting.height;
-        this.el.appendChild(this.canvas);
-        if (this.setting.autoPlay) {
-            this.play();
-        }
+        
+        if (this.setting.el !== undefined) {
+            this.el.appendChild(this.canvas);
+            this.trigger('mounted');
+            if (this.setting.autoPlay) {
+                this.play();
+            }
+        }     
     };
 
     Sprite.prototype._controlAnimation = function() {
@@ -302,6 +306,18 @@ var Sprite = (function() {
             this.trigger('stop');
             clearInterval(this.timer);    
         }
+        return this;
+    };
+
+    /**
+     * mount must be run after load event
+     * @param  {HTMLElement} dom
+     * @return {Sprite}
+     */
+    Sprite.prototype.mount = function(dom) {
+        this.el = dom;
+        this.el.appendChild(this.canvas);
+        this.trigger('mounted');
         return this;
     };
 
